@@ -66,33 +66,21 @@ def input_list_number
   gets.chomp.to_i - 1
 end
 
-def baby_star_gu_win(first_player, second_player)
+def baby_star_win_result(first_player, second_player)
   if first_player == 1 && second_player == 2
-    baby_star_result = "1p_gu_win"
+    "1p_gu_win"
   elsif first_player == 2 && second_player == 1
-    baby_star_result == "2p_gu_win"
-  end
-end
-
-def baby_star_choki_win(first_player, second_player)
-  if first_player == 2 && second_player == 3
-    baby_star_result = "1p_choki_win"
+    "2p_gu_win"
+  elsif first_player == 2 && second_player == 3
+    "1p_choki_win"
   elsif first_player == 3 && second_player == 2
-    baby_star_result = "2p_choki_win"
-  end
-end
-
-def baby_star_pa_win(first_player, second_player)
-  if first_player == 3 && second_player == 1
-    baby_star_result = "1p_pa_win"
+    "2p_choki_win"
+  elsif first_player == 3 && second_player == 1
+    "1p_pa_win"
   elsif first_player == 1 && second_player == 3
-    baby_star_result = "2p_pa_win"
-  end
-end
-
-def baby_star_aiko(first_player, second_player)
-  if first_player == second_player
-    baby_star_result = "aiko"
+    "2p_pa_win"
+  else
+    "aiko"
   end
 end
 
@@ -111,18 +99,18 @@ takemura_power = 1000000000
 power = player_power + weapon_power
 takemura_sum_power = takemura_power + weapon_power
 
-# NOTE: 紹介
-bar
-puts "キャラ・装備紹介"
-if first_player_charactor == "竹村まさし"
-  puts "「#{first_player_charactor}」 戦闘力： #{takemura_power} "
-  puts "「#{first_player_weapon}」 戦闘力：#{weapon_power}"
-  puts "合計戦闘力： #{takemura_sum_power}"
-else
-  puts "「#{first_player_charactor}」 戦闘力： #{player_power} "
-  puts "「#{first_player_weapon}」 戦闘力：#{weapon_power}"
-  puts "合計戦闘力： #{power}"
-end
+# # NOTE: 紹介
+# bar
+# puts "キャラ・装備紹介"
+# if first_player_charactor == "竹村まさし"
+#   puts "「#{first_player_charactor}」 戦闘力： #{takemura_power} "
+#   puts "「#{first_player_weapon}」 戦闘力：#{weapon_power}"
+#   puts "合計戦闘力： #{takemura_sum_power}"
+# else
+#   puts "「#{first_player_charactor}」 戦闘力： #{player_power} "
+#   puts "「#{first_player_weapon}」 戦闘力：#{weapon_power}"
+#   puts "合計戦闘力： #{power}"
+# end
 
 # NOTE: 2P；キャラクター選択
 puts "2P: 戦うキャラクターを選べ"
@@ -140,64 +128,69 @@ second_power = second_player_power + second_weapon_power
 second_takemura_sum_power = second_takemura_power + second_weapon_power
 
 # NOTE: 紹介
-bar
-puts "キャラ・装備紹介"
-if second_player_charactor == "竹村まさし"
-  puts "「#{second_player_charactor}」 戦闘力： #{second_takemura_power} "
-  puts "「#{second_player_weapon}」 戦闘力：#{second_weapon_power}"
-  puts "合計戦闘力： #{second_takemura_sum_power}"
-else
-  puts "「#{second_player_charactor}」 戦闘力： #{second_player_power} "
-  puts "「#{second_player_weapon}」 戦闘力：#{second_weapon_power}"
-  puts "合計戦闘力： #{second_power}"
-end
+# bar
+# puts "キャラ・装備紹介"
+# if second_player_charactor == "竹村まさし"
+#   puts "「#{second_player_charactor}」 戦闘力： #{second_takemura_power} "
+#   puts "「#{second_player_weapon}」 戦闘力：#{second_weapon_power}"
+#   puts "合計戦闘力： #{second_takemura_sum_power}"
+# else
+#   puts "「#{second_player_charactor}」 戦闘力： #{second_player_power} "
+#   puts "「#{second_player_weapon}」 戦闘力：#{second_weapon_power}"
+#   puts "合計戦闘力： #{second_power}"
+# end
 
 # NOTE: 死亡フラグの初期設定
-1p_shibo_flag = 0
-2p_shibo_flag = 0
+first_player_shibo_flag = 0
+second_player_shibo_flag = 0
 
-# NOTE: 下記をループさせる・どちらかが戦闘不能でないか検証
-while 1p_shibo_flag == 1 || 2p_shibo_flag == 1 do
+# NOTE: ループさせる・どちらかが戦闘不能でないか検証
+until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
   # NOTE: じゃんけんフェーズ
   # baby_star == yo! チェケラチョ yo! ベビースター！の意
   # ジャンケンのロジック: {1: グー, 2: チョキ, 3: パー}
+  bar
+  puts "じゃんけんするっす！"
 
+  bar
   # 1Pのじゃんけん選択
-  1p_baby_star = input_number
+  puts "#{first_player_charactor}のyo!チェケラッチョyo!ベビースター！"
+  first_player_baby_star = input_number
 
+  bar
   # 2Pのじゃんけん選択
-  2p_baby_star = input_number
+  puts "#{second_player_charactor}のyo!チェケラッチョyo!ベビースター！"
+  second_player_baby_star = input_number
 
   # NOTE: じゃんけん結果っす！
-  baby_star_gu_win(1p_baby_star, 2p_baby_star)
-  baby_star_choki_win(1p_baby_star, 2p_baby_star)
-  baby_star_pa_win(1p_baby_star, 2p_baby_star)
-  baby_star_aiko(1p_baby_star, 2p_baby_star)
+  baby_star_result = baby_star_win_result(first_player_baby_star, second_player_baby_star)
 
-  # NOTE: 某神社「ビストロ寺のじゃんけんのリザルトっす！」
+  # NOTE: 桜小路某神社「ビストロ寺のじゃんけんのリザルトっす！」
   case baby_star_result
   when "aiko"
     # 何もせずに最初に戻る
     puts "あいこ"
   when "1p_gu_win"
     # 1pがグーの攻撃
-    puts "#{first_player_charactor.name}がグーで勝ち"
+    # TODO: 本来はfirst_player_charactor.nameから呼び出す
+    puts "#{first_player_charactor}がグーで勝ち"
   when "2p_gu_win"
     # 2pがグーの攻撃
-    puts "#{second_player_charactor.name}がグーで勝ち"
+    puts "#{second_player_charactor}がグーで勝ち"
   when "1p_choki_win"
     # 1pがチョキの攻撃
-    puts "#{first_player_charactor.name}がチョキで勝ち"
+    puts "#{first_player_charactor}がチョキで勝ち"
   when "2p_choki_win"
     # 2pがチョキの攻撃
-    puts "#{second_player_charactor.name}がチョキで勝ち"
+    puts "#{second_player_charactor}がチョキで勝ち"
   when "1p_pa_win"
     # 1pがパーの攻撃
-    puts "#{first_player_charactor.name}がパーで勝ち"
+    puts "#{first_player_charactor}がパーで勝ち"
   when "2p_pa_win"
     # 2pがパーの攻撃
-    puts "#{second_player_charactor.name}がパーで勝ち"
+    puts "#{second_player_charactor}がパーで勝ち"
   end
+
 end
 
   # NOTE: ダメージ表示フェーズ
