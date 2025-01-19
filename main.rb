@@ -12,7 +12,8 @@ class MasterDataList
         "Go!Let's be Go",
         "ちょんむげにが",
         "竹村まさし",
-        "ちょえちょえアキラ"
+        "ちょえちょえアキラ",
+        "山田ヤマーダ"
       ]
     end
 
@@ -50,7 +51,7 @@ second_charactor_status = CharactorStatus.new('澁谷かのん', 660000)
 # NOTE: メソット定義
 def show_props_list(props)
   props.each.with_index(1) do |prop, index|
-    puts "#{index}: #{props[index - 1]}"
+    puts "#{index}: #{prop}"
   end
 end
 
@@ -60,7 +61,7 @@ bar
 show_props_list(MasterDataList.charactor)
 
 num = gets.chomp.to_i - 1
-first_player_charactor = charactor_list[num]
+first_player_charactor = MasterDataList.charactor[num]
 
 # NOTE: 武器選択
 puts "1P: 戦う武器を選べ"
@@ -68,7 +69,7 @@ bar
 show_props_list(MasterDataList.weapon)
 
 num = gets.chomp.to_i - 1
-first_player_weapon = weapon_list[num]
+first_player_weapon = MasterDataList.weapon[num]
 
 # NOTE: 数値振り分け
 player_power = rand(99) * 1000
@@ -78,7 +79,7 @@ power = player_power + weapon_power
 takemura_sum_power = takemura_power + weapon_power
 
 # NOTE: 紹介
-puts BAR
+bar
 puts "キャラ・装備紹介"
 if first_player_charactor == "竹村まさし"
   puts "「#{first_player_charactor}」 戦闘力： #{takemura_power} "
@@ -95,7 +96,7 @@ puts "2P: 戦うキャラクターを選べ"
 show_props_list(MasterDataList.charactor)
 
 num = gets.chomp.to_i - 1
-second_player_charactor = charactor_list[num]
+second_player_charactor = MasterDataList.charactor[num]
 
 # NOTE: 武器選択
 puts "2P: 戦う武器を選べ"
@@ -103,7 +104,7 @@ bar
 show_props_list(MasterDataList.weapon)
 
 num = gets.chomp.to_i - 1
-second_player_weapon = weapon_list[num]
+second_player_weapon = MasterDataList.charactor[num]
 
 # NOTE: 数値振り分け
 second_player_power = rand(99) * 1000
@@ -125,13 +126,17 @@ else
   puts "合計戦闘力： #{second_power}"
 end
 
-
 # NOTE: 下記をループさせる
 # NOTE: どちらかが戦闘不能でないか検証
 
   # NOTE: じゃんけんフェーズ
+    # 1Pのジャンケン選択
+    # 2Pのジャンケン選択
+    # あいこになったら何もせず、じゃんけんフェーズの最初に戻る
 
   # NOTE: ダメージ計算フェーズ
+    # 〇〇の攻撃（技名表示）
+    # 二人の現在のHP表示
 
 # NOTE: もしもバトルが終わってたらリザルトを表示
 # NOTE: プログラムを終了
