@@ -116,6 +116,9 @@ takemura_sum_power = takemura_power + weapon_power
 #   puts "合計戦闘力： #{power}"
 # end
 
+blank
+blank
+
 # NOTE: 2P；キャラクター選択
 puts "2P: 戦うキャラクターを選べ"
 show_props_list(MasterDataList.charactor)
@@ -203,7 +206,10 @@ until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
     # 2pがパーの攻撃
     puts "#{second_player_charactor}がパーで勝ち"
   end
+
   sleep 2
+  blank
+  blank
   blank
 
 end
