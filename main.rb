@@ -17,6 +17,7 @@ class MasterDataList
       ]
     end
 
+    #TODO: 今は使わない
     def weapon
       [
         "タライロンバーバー",
@@ -36,6 +37,7 @@ class CharactorStatus
   end
 end
 
+#TODO: 今は使わない 
 class WeaponStatus
   attr_accessor :name, :power
 
@@ -45,6 +47,7 @@ class WeaponStatus
   end
 end
 
+# TODO: 仮なので後で消す
 firsr_charactor_status = CharactorStatus.new('山田ヤマーダ', 20000)
 second_charactor_status = CharactorStatus.new('澁谷かのん', 660000)
 
@@ -63,6 +66,36 @@ def input_list_number
   gets.chomp.to_i - 1
 end
 
+def baby_star_gu_win(first_player, second_player)
+  if first_player == 1 && second_player == 2
+    baby_star_result = "1p_gu_win"
+  elsif first_player == 2 && second_player == 1
+    baby_star_result == "2p_gu_win"
+  end
+end
+
+def baby_star_choki_win(first_player, second_player)
+  if first_player == 2 && second_player == 3
+    baby_star_result = "1p_choki_win"
+  elsif first_player == 3 && second_player == 2
+    baby_star_result = "2p_choki_win"
+  end
+end
+
+def baby_star_pa_win(first_player, second_player)
+  if first_player == 3 && second_player == 1
+    baby_star_result = "1p_pa_win"
+  elsif first_player == 1 && second_player == 3
+    baby_star_result = "2p_pa_win"
+  end
+end
+
+def baby_star_aiko(first_player, second_player)
+  if first_player == second_player
+    baby_star_result = "aiko"
+  end
+end
+
 # NOTE: キャラクター選択
 puts "1P: 戦うキャラクターを選べ"
 bar
@@ -70,14 +103,6 @@ show_props_list(MasterDataList.charactor)
 
 num = input_list_number
 first_player_charactor = MasterDataList.charactor[num]
-
-# NOTE: 武器選択
-puts "1P: 戦う武器を選べ"
-bar
-show_props_list(MasterDataList.weapon)
-
-num = input_list_number
-first_player_weapon = MasterDataList.weapon[num]
 
 # NOTE: 数値振り分け
 player_power = rand(99) * 1000
@@ -106,13 +131,6 @@ show_props_list(MasterDataList.charactor)
 num = input_list_number
 second_player_charactor = MasterDataList.charactor[num]
 
-# NOTE: 武器選択
-puts "2P: 戦う武器を選べ"
-bar
-show_props_list(MasterDataList.weapon)
-
-num = input_list_number
-second_player_weapon = MasterDataList.charactor[num]
 
 # NOTE: 数値振り分け
 second_player_power = rand(99) * 1000
@@ -140,21 +158,49 @@ end
 
 # NOTE: 下記をループさせる・どちらかが戦闘不能でないか検証
 while 1p_shibo_flag == 1 || 2p_shibo_flag == 1 do
-  # NOTE: じゃんけんフェーズ・1Pのじゃんけん選択
-  #       baby_star == yo! チェケラチョ yo! ベビースター！の意
+  # NOTE: じゃんけんフェーズ
+  # baby_star == yo! チェケラチョ yo! ベビースター！の意
+  # ジャンケンのロジック: {1: グー, 2: チョキ, 3: パー}
+
+  # 1Pのじゃんけん選択
   1p_baby_star = input_number
 
   # 2Pのじゃんけん選択
   2p_baby_star = input_number
 
-  # NOTE: 某神社「じゃんけんのリザルトっす！」
-  # あいこになったら何もせず、じゃんけんフェーズの最初に戻る
-  
+  # NOTE: じゃんけん結果っす！
+  baby_star_gu_win(1p_baby_star, 2p_baby_star)
+  baby_star_choki_win(1p_baby_star, 2p_baby_star)
+  baby_star_pa_win(1p_baby_star, 2p_baby_star)
+  baby_star_aiko(1p_baby_star, 2p_baby_star)
+
+  # NOTE: 某神社「ビストロ寺のじゃんけんのリザルトっす！」
+  case baby_star_result
+  when "aiko"
+    # 何もせずに最初に戻る
+    puts "あいこ"
+  when "1p_gu_win"
+    # 1pがグーの攻撃
+    puts "#{first_player_charactor.name}がグーで勝ち"
+  when "2p_gu_win"
+    # 2pがグーの攻撃
+    puts "#{second_player_charactor.name}がグーで勝ち"
+  when "1p_choki_win"
+    # 1pがチョキの攻撃
+    puts "#{first_player_charactor.name}がチョキで勝ち"
+  when "2p_choki_win"
+    # 2pがチョキの攻撃
+    puts "#{second_player_charactor.name}がチョキで勝ち"
+  when "1p_pa_win"
+    # 1pがパーの攻撃
+    puts "#{first_player_charactor.name}がパーで勝ち"
+  when "2p_pa_win"
+    # 2pがパーの攻撃
+    puts "#{second_player_charactor.name}がパーで勝ち"
+  end
 end
 
-
-
-  # NOTE: ダメージ計算フェーズ
+  # NOTE: ダメージ表示フェーズ
     # 〇〇の攻撃（技名表示）
     # 二人の現在のHP表示
 
