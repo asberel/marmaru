@@ -10,14 +10,15 @@ end
 # NOTE: マスターデータ定義
 class MasterDataList
   class << self
-    def charactor
+    def characters
       [
         "TK美",
         "Go!Let's be Go",
         "ちょんむげにが",
         "竹村まさし",
         "ちょえちょえアキラ",
-        "山田ヤマーダ"
+        "山田ヤマーダ",
+        "中城漸大"
       ]
     end
 
@@ -32,12 +33,15 @@ class MasterDataList
   end
 end
 
-class CharactorStatus
+class CharacterStatus
   attr_accessor :name, :power
 
-  def initialize(name, power)
+  def initialize(name, hit_point, gu_power, choki_power, pa_power)
     @name = name
-    @power  = power
+    @hit_point = hit_point
+    @gu_power  = gu_power
+    @choki_power = choki_power
+    @pa_power = pa_power
   end
 end
 
@@ -51,9 +55,15 @@ class WeaponStatus
   end
 end
 
-# TODO: 仮なので後で消す
-firsr_charactor_status = CharactorStatus.new('山田ヤマーダ', 20000)
-second_charactor_status = CharactorStatus.new('澁谷かのん', 660000)
+# NOTE: キャラクターセッティング
+all_character_list = 
+CharacterStatus.new("TK美", 15000, 6000, 3000, 3000),
+CharacterStatus.new("Go! Let's be Go", 15000, 3000, 3000, 6000),
+CharacterStatus.new("ちょんむげにが", 15000, 3000, 6000, 3000),
+CharacterStatus.new("竹村まさし", 15000, 3000, 3000, 6000),
+CharacterStatus.new("ちょえちょえアキラ", 15000, 3000, 6000, 3000),
+CharacterStatus.new("山田ヤマーダ", 15000, 6000, 3000, 3000),
+CharacterStatus.new("中城漸大", 15000, 6000, 3000, 3000)
 
 # NOTE: メソット定義
 def show_props_list(props)
@@ -88,70 +98,34 @@ def baby_star_win_result(first_player, second_player)
   end
 end
 
+
+# NOTE: ここから表示部分
+
 # NOTE: キャラクター選択
 puts "1P: 戦うキャラクターを選べ"
 bar
-show_props_list(MasterDataList.charactor)
+show_props_list(MasterDataList.characters)
+blank
 
 num = input_list_number
-first_player_charactor = MasterDataList.charactor[num]
-
-# NOTE: 数値振り分け
-player_power = rand(99) * 1000
-weapon_power = rand(10) * 1000
-takemura_power = 1000000000
-power = player_power + weapon_power
-takemura_sum_power = takemura_power + weapon_power
-
-# # NOTE: 紹介
-# bar
-# puts "キャラ・装備紹介"
-# if first_player_charactor == "竹村まさし"
-#   puts "「#{first_player_charactor}」 戦闘力： #{takemura_power} "
-#   puts "「#{first_player_weapon}」 戦闘力：#{weapon_power}"
-#   puts "合計戦闘力： #{takemura_sum_power}"
-# else
-#   puts "「#{first_player_charactor}」 戦闘力： #{player_power} "
-#   puts "「#{first_player_weapon}」 戦闘力：#{weapon_power}"
-#   puts "合計戦闘力： #{power}"
-# end
+first_player_character = all_character_list[num]
 
 blank
 blank
 
 # NOTE: 2P；キャラクター選択
 puts "2P: 戦うキャラクターを選べ"
-show_props_list(MasterDataList.charactor)
+show_props_list(MasterDataList.characters)
+blank
 
 num = input_list_number
-second_player_charactor = MasterDataList.charactor[num]
-
-
-# NOTE: 数値振り分け
-second_player_power = rand(99) * 1000
-second_weapon_power = rand(10) * 1000
-second_takemura_power = 1000000000
-second_power = second_player_power + second_weapon_power
-second_takemura_sum_power = second_takemura_power + second_weapon_power
-
-# NOTE: 紹介
-# bar
-# puts "キャラ・装備紹介"
-# if second_player_charactor == "竹村まさし"
-#   puts "「#{second_player_charactor}」 戦闘力： #{second_takemura_power} "
-#   puts "「#{second_player_weapon}」 戦闘力：#{second_weapon_power}"
-#   puts "合計戦闘力： #{second_takemura_sum_power}"
-# else
-#   puts "「#{second_player_charactor}」 戦闘力： #{second_player_power} "
-#   puts "「#{second_player_weapon}」 戦闘力：#{second_weapon_power}"
-#   puts "合計戦闘力： #{second_power}"
-# end
+second_player_character = all_character_list[num]
 
 blank
 blank
 
 # NOTE: 誰と誰が戦うか表示
-puts "#{first_player_charactor} VS #{second_player_charactor}"
+puts "#{first_player_character.name} VS #{second_player_character.name}"
 sleep 1
 puts "熱き戦いの火蓋が、切って落とされた！！"
 sleep 3
@@ -170,16 +144,22 @@ until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
 
   bar
   # 1Pのじゃんけん選択
-  puts "#{first_player_charactor}のyo!チェケラッチョyo!ベビースター！"
+  puts "#{first_player_character.name}のyo!チェケラッチョyo!ベビースター！"
+  blank
   first_player_baby_star = input_number
 
   bar
   # 2Pのじゃんけん選択
-  puts "#{second_player_charactor}のyo!チェケラッチョyo!ベビースター！"
+  puts "#{second_player_character.name}のyo!チェケラッチョyo!ベビースター！"
+  blank
   second_player_baby_star = input_number
 
   # NOTE: じゃんけん結果っす！
   baby_star_result = baby_star_win_result(first_player_baby_star, second_player_baby_star)
+
+  blank
+  blank
+  sleep 2
 
   # NOTE: 桜小路某神社「ビストロ寺のじゃんけんのリザルトっす！」
   case baby_star_result
@@ -188,23 +168,23 @@ until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
     puts "あいこ"
   when "1p_gu_win"
     # 1pがグーの攻撃
-    # TODO: 本来はfirst_player_charactor.nameから呼び出す
-    puts "#{first_player_charactor}がグーで勝ち"
+    # TODO: 本来はfirst_player_character.nameから呼び出す
+    puts "#{first_player_character.name}がグーで勝ち"
   when "2p_gu_win"
     # 2pがグーの攻撃
-    puts "#{second_player_charactor}がグーで勝ち"
+    puts "#{second_player_character.name}がグーで勝ち"
   when "1p_choki_win"
     # 1pがチョキの攻撃
-    puts "#{first_player_charactor}がチョキで勝ち"
+    puts "#{first_player_character.name}がチョキで勝ち"
   when "2p_choki_win"
     # 2pがチョキの攻撃
-    puts "#{second_player_charactor}がチョキで勝ち"
+    puts "#{second_player_character.name}がチョキで勝ち"
   when "1p_pa_win"
     # 1pがパーの攻撃
-    puts "#{first_player_charactor}がパーで勝ち"
+    puts "#{first_player_character.name}がパーで勝ち"
   when "2p_pa_win"
     # 2pがパーの攻撃
-    puts "#{second_player_charactor}がパーで勝ち"
+    puts "#{second_player_character.name}がパーで勝ち"
   end
 
   sleep 2
