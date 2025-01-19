@@ -3,6 +3,10 @@ def bar
   puts "===================="
 end
 
+def blank
+  puts ""
+end
+
 # NOTE: マスターデータ定義
 class MasterDataList
   class << self
@@ -140,6 +144,15 @@ second_takemura_sum_power = second_takemura_power + second_weapon_power
 #   puts "合計戦闘力： #{second_power}"
 # end
 
+blank
+blank
+
+# NOTE: 誰と誰が戦うか表示
+puts "#{first_player_charactor} VS #{second_player_charactor}"
+sleep 1
+puts "熱き戦いの火蓋が、切って落とされた！！"
+sleep 3
+
 # NOTE: 死亡フラグの初期設定
 first_player_shibo_flag = 0
 second_player_shibo_flag = 0
@@ -190,6 +203,8 @@ until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
     # 2pがパーの攻撃
     puts "#{second_player_charactor}がパーで勝ち"
   end
+  sleep 2
+  blank
 
 end
 
