@@ -55,12 +55,20 @@ def show_props_list(props)
   end
 end
 
+def input_number
+  gets.chomp.to_i
+end
+
+def input_list_number
+  gets.chomp.to_i - 1
+end
+
 # NOTE: キャラクター選択
 puts "1P: 戦うキャラクターを選べ"
 bar
 show_props_list(MasterDataList.charactor)
 
-num = gets.chomp.to_i - 1
+num = input_list_number
 first_player_charactor = MasterDataList.charactor[num]
 
 # NOTE: 武器選択
@@ -68,7 +76,7 @@ puts "1P: 戦う武器を選べ"
 bar
 show_props_list(MasterDataList.weapon)
 
-num = gets.chomp.to_i - 1
+num = input_list_number
 first_player_weapon = MasterDataList.weapon[num]
 
 # NOTE: 数値振り分け
@@ -95,7 +103,7 @@ end
 puts "2P: 戦うキャラクターを選べ"
 show_props_list(MasterDataList.charactor)
 
-num = gets.chomp.to_i - 1
+num = input_list_number
 second_player_charactor = MasterDataList.charactor[num]
 
 # NOTE: 武器選択
@@ -103,7 +111,7 @@ puts "2P: 戦う武器を選べ"
 bar
 show_props_list(MasterDataList.weapon)
 
-num = gets.chomp.to_i - 1
+num = input_list_number
 second_player_weapon = MasterDataList.charactor[num]
 
 # NOTE: 数値振り分け
@@ -126,13 +134,25 @@ else
   puts "合計戦闘力： #{second_power}"
 end
 
-# NOTE: 下記をループさせる
-# NOTE: どちらかが戦闘不能でないか検証
+# NOTE: 死亡フラグの初期設定
+1p_shibo_flag = 0
+2p_shibo_flag = 0
 
-  # NOTE: じゃんけんフェーズ
-    # 1Pのジャンケン選択
-    # 2Pのジャンケン選択
-    # あいこになったら何もせず、じゃんけんフェーズの最初に戻る
+# NOTE: 下記をループさせる・どちらかが戦闘不能でないか検証
+while 1p_shibo_flag == 1 || 2p_shibo_flag == 1 do
+  # NOTE: じゃんけんフェーズ・1Pのじゃんけん選択
+  #       baby_star == yo! チェケラチョ yo! ベビースター！の意
+  1p_baby_star = input_number
+
+  # 2Pのじゃんけん選択
+  2p_baby_star = input_number
+
+  # NOTE: 某神社「じゃんけんのリザルトっす！」
+  # あいこになったら何もせず、じゃんけんフェーズの最初に戻る
+  
+end
+
+
 
   # NOTE: ダメージ計算フェーズ
     # 〇〇の攻撃（技名表示）
