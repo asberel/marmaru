@@ -104,7 +104,6 @@ def baby_star_win_result(first_player, second_player)
 end
 
 def baby_star_skill_text(win_player_name, lose_player_name, win_player_skill_name, win_player_skill_power)
-  puts "#{win_player_name}がグーで勝ち"
   sleep 1
   puts "#{win_player_name}の攻撃"
   sleep 2
@@ -163,7 +162,6 @@ until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
   # NOTE: じゃんけんフェーズ
   # baby_star == yo! チェケラチョ yo! ベビースター！の意
   # ジャンケンのロジック: {1: グー, 2: チョキ, 3: パー}
-  
 
   # NOTE: 現在のラウンドを表示
   puts "#{turn}ターン目"
@@ -202,26 +200,32 @@ until first_player_shibo_flag == 1 || second_player_shibo_flag == 1
     puts "あいこ"
   when "1p_gu_win"
     # 1pがグーの攻撃
+    puts "#{first_player_character.name}がグーで勝ち"
     baby_star_skill_text(first_player_character.name, second_player_character.name, first_player_character.gu_skill_name, first_player_character.gu_power)
     current_second_player_character_hit_point -= first_player_character.gu_power
   when "2p_gu_win"
     # 2pがグーの攻撃
+    puts "#{second_player_character.name}がグーで勝ち"
     baby_star_skill_text(second_player_character.name, first_player_character.name, second_player_character.gu_skill_name, second_player_character.gu_power)
     current_first_player_character_hit_point -= second_player_character.gu_power
   when "1p_choki_win"
     # 1pがチョキの攻撃
+    puts "#{first_player_character.name}がチョキで勝ち"
     baby_star_skill_text(first_player_character.name, second_player_character.name, first_player_character.choki_skill_name, first_player_character.choki_power)
     current_second_player_character_hit_point -= first_player_character.choki_power
   when "2p_choki_win"
     # 2pがチョキの攻撃
+    puts "#{second_player_character.name}がチョキで勝ち"
     baby_star_skill_text(second_player_character.name, first_player_character.name, second_player_character.choki_skill_name, second_player_character.choki_power)
     current_first_player_character_hit_point -= second_player_character.choki_power
   when "1p_pa_win"
     # 1pがパーの攻撃
+    puts "#{first_player_character.name}がパーで勝ち"
     baby_star_skill_text(first_player_character.name, second_player_character.name, first_player_character.pa_skill_name, first_player_character.pa_power)
     current_second_player_character_hit_point -= first_player_character.pa_power
   when "2p_pa_win"
     # 2pがパーの攻撃
+    puts "#{second_player_character.name}がパーで勝ち"
     baby_star_skill_text(second_player_character.name, first_player_character.name, second_player_character.pa_skill_name, second_player_character.pa_power)
     current_first_player_character_hit_point -= second_player_character.pa_power
   end
